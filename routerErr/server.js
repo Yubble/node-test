@@ -12,7 +12,8 @@ http.createServer(async (req, res) => {
     res.end('reach test1')
   } else if (req.url === '/err') {
     let jif = 111
-    for (let i = 0; i < 99999; i++) {
+    // 如果存在消耗cpu的循环计算，会导致其他路由也无法及时响应
+    for (let i = 0; i < 1e10; i++) {
       jif += i
     }
     res.end(jif)
